@@ -1,0 +1,73 @@
+<html>
+    <head>
+        <title>Stopwatch</title>
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <h1>Stopwatch</h1>
+            <p><span id="seconds">00</span> : <span id="miliseconds">00</span></p>
+            <button id="start">Start</button>
+            <button id="stop">Stop</button>
+            <button id="reset">Reset</button>
+        </div>
+
+        <script>
+            window.onload = function () {
+                var seconds = 0;
+                var miliseconds = 0; 
+                var appendSeconds = document.getElementById("seconds");
+                var appendMiliseconds = document.getElementById("miliseconds");
+                var start = document.getElementById("start");
+                var stop = document.getElementById("stop");
+                var reset = document.getElementById("reset");
+                var interval; 
+            
+
+                start.onclick = function () {
+                    clearInterval(interval);
+                    interval = setInterval(startTimer, 10);
+                }
+
+                stop.onclick = function () {
+                    clearInterval(interval);
+                }
+
+                reset.onclick = function () {
+                    clearInterval(interval);
+                    seconds = 0;
+                    miliseconds = 0;
+                    appendMiliseconds.innerHTML = miliseconds;
+                    appendSeconds.innerHTML = seconds;
+                }
+
+                function startTimer() {
+                    miliseconds++;
+
+                    if (miliseconds <= 9) {
+                        appendMiliseconds.innerHTML = "0" + miliseconds;
+                    } 
+
+                    if (miliseconds > 9 ) {
+                        appendMiliseconds.innerHTML = miliseconds;
+                    }
+
+                    if (miliseconds > 99) {
+                        seconds++;
+                        miliseconds = 0;
+                        appendSeconds.innerHTML = seconds <= 9 ? "0" + seconds : seconds;
+                        appendMiliseconds.innerHTML = "00";
+                    }
+
+
+                    if (seconds > 9) {
+                        appendSeconds.innerHTML = seconds;
+                    }
+                }
+            }
+
+        </script>
+
+    </body>
+
+</html>
